@@ -6,9 +6,9 @@
         "dbname":"transfer"
     },
     "folders":{
-        "base":"base",
+        "base":"./base/",
         "upload":"dotsTransfer",
-        "download":"./"
+        "baseURL":"/dotsFileTransfer/base/"
     },
     "logfile":"log.log"
 }

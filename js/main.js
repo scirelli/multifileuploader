@@ -48,6 +48,7 @@
         $rmButton.click( removeFileBtnClick );
         return $itm;
     }
+
     function createFrameUploadFile(){
         var id = g_nFileCount++,
             s  = sFrameFileUploadTemplate,
@@ -60,6 +61,7 @@
         $rmButton.click( removeFrameFileBtnClick );
         return $itm;
     }
+
     function uploadFileBtnClick(e){
         $('.container form').each(function(index){
             var $form   = $(this), 
@@ -72,6 +74,7 @@
         e.preventDefault();
         return false;
     }
+
     function uploadFrameFileBtnClick(e){
         $('.container iframe').each(function(index){
             var form = this.contentDocument.getElementsByTagName('form')[0],
@@ -87,18 +90,40 @@
         e.preventDefault();
         return false;
     }
+
     function addFileBtnClick(e){
         var $fileUp = createUploadFile();
         $ListFileUpload.append( $fileUp );
     }
+
     function addFrameFileBtnClick(e){
         var $fileUp = createFrameUploadFile();
         $ListFileUpload.append( $fileUp );
+    }
+    
+    function getDownLoadableFiles(){
+        var deferred = Q.defer();
+
+        $.ajax({
+            url:"/dotsFileTransfer/getDownloadableFiles.php",
+            dataType:'json',
+            success:function( data, textStatus, jqXHR ){
+                deferred.resolve(data);
+            },
+            error:function( jqXHR, textStatus, errorThrown ){
+                deferred.reject( errorThrown );
+            }
+        });
+
+        return deferred.promise;
     }
 
     $(document).ready(function(){
         $addFileBtn.click(addFrameFileBtnClick);
         $uploadFileBtn.click(uploadFrameFileBtnClick);
         $addFileBtn.click();
+        getDownLoadableFiles().then(function(data){
+            debugger;
+        });
     });
 }();
