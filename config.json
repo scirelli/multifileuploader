@@ -1,0 +1,14 @@
+{
+    "database":{
+        "username":"stevecirelli",
+        "host":"localhost",
+        "password":"",
+        "dbname":"transfer"
+    },
+    "folders":{
+        "base":"base",
+        "upload":"dotsTransfer",
+        "download":"./"
+    },
+    "logfile":"log.log"
+}
