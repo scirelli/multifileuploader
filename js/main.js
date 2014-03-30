@@ -83,7 +83,7 @@
                 $lding = $(this).parent().find('.title-loading-icon');
 
             $lding.css('visibility','visible');
-            if( form ){
+            if( form && form.length ){
                 form = form[0];
                 form.appendChild(s[0]);
                 $(this).load(function(e){
