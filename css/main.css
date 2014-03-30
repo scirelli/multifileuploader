@@ -99,6 +99,32 @@ textarea {
 body{
     background-color:black;
 }
+/*
+body{
+    background-image:url("/dotsFileTransfer/img/boss-pink-dots-polka.jpg");
+    background-repeat:repeat-x;
+    background-position:0px 100px;
+}
+body{
+    background-image:url("/dotsFileTransfer/img/happy-polka-white-dots.jpg");
+    background-repeat:repeat;
+}
+body{
+    background-image:url("/dotsFileTransfer/img/images_cropped.jpg");
+    background-repeat:repeat;
+}
+*/
+
+.title-loading-icon{
+    background:url(/dotsFileTransfer/img/loading-icon.gif) no-repeat 0px 0px;
+    width:20px;
+    height:20px;
+    border:none;
+    display:inline-block;
+    vertical-align:middle;
+    visibility:hidden;
+}
+
 .page-header{
     color:#0000AA;
 }
@@ -113,7 +139,7 @@ body{
 }
 .content-list{
     overflow-y:auto;
-    height:400px;
+    height:385px;
 }
 .content-list ul{
     padding:0px;
@@ -121,7 +147,11 @@ body{
     margin:0;
 }
 ul#ul_fileuploads{
-    padding-left:15px;
+    /*padding-left:15px;*/
+}
+
+ul#ul_fileuploads .form-group{
+    margin-bottom:0px;
 }
 
 .menu{
@@ -148,13 +178,15 @@ form div.form-group button, form div.form-group input{
     border:none;
     width:80%;
     height:24px;
-    position:absolute;
+    position:relative;
+    top:9px;
     margin-left:5px;
 }
 
-
-
-
+.download-file{
+    width:100%;
+    margin-bottom:2px;
+}
 
 
 /* ==========================================================================

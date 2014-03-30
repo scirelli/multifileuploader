@@ -8,7 +8,8 @@
         $ListFileUpload         = $('#ul_fileuploads'),
         $ListFileDownload       = $('#ul_filedownloads'),
         $addFileBtn             = $('#add-upload-file'),
-        $uploadFileBtn          = $('#submit-files');
+        $uploadFileBtn          = $('#submit-files'),
+        $downloadLoadingIcn     = $('#download-loading');
 
     function addNewFile(){
         var fileListCont = $('div#listOfFiles');
@@ -77,13 +78,16 @@
 
     function uploadFrameFileBtnClick(e){
         $('.container iframe').each(function(index){
-            var form = this.contentDocument.getElementsByTagName('form')[0],
-                s    = $('<input type="hidden" name="file_id" value="' + $(this).attr('data-id') + '"/>');
-                
+            var form   = this.contentDocument.getElementsByTagName('form')[0],
+                s      = $('<input type="hidden" name="file_id" value="' + $(this).attr('data-id') + '"/>'),
+                $lding = $(this).parent().find('.title-loading-icon');
+
+            $lding.css('visibility','visible');
             form.appendChild(s[0]);
             $(this).load(function(e){
                 console.log(JSON.parse(this.contentDocument.body.innerText));
                 this.contentDocument.body.innerHTML = 'Success!';
+                $lding.css('visibility','hidden');
             });
             form.submit();
         });
@@ -98,12 +102,20 @@
 
     function addFrameFileBtnClick(e){
         var $fileUp = createFrameUploadFile();
-        $ListFileUpload.append( $fileUp );
+        $ListFileUpload.prepend( $fileUp );
     }
-    
+    function showDownloadLoading( bShow ){
+        if( bShow ){
+            $downloadLoadingIcn.css('visibility','visible');
+        }else{
+                $downloadLoadingIcn.css('visibility','hidden');
+        }
+    }
+
     function getDownLoadableFiles(){
         var deferred = Q.defer();
 
+        showDownloadLoading(true);
         $.ajax({
             url:"/dotsFileTransfer/getDownloadableFiles.php",
             dataType:'json',
@@ -117,13 +129,29 @@
 
         return deferred.promise;
     }
-
+    function downloadFile( e ){
+        debugger;
+    }
     $(document).ready(function(){
         $addFileBtn.click(addFrameFileBtnClick);
         $uploadFileBtn.click(uploadFrameFileBtnClick);
         $addFileBtn.click();
         getDownLoadableFiles().then(function(data){
-            debugger;
+            if( data instanceof Array && data.length ){
+                for( var i=0,l=data.length,itm=null,fileName='',btn='',btnTmpl=sDownLoadButtonTemplate,url=''; i<l; i++ ){
+                    itm = data[i];
+                    fileName = itm.split('/');
+                    fileName = fileName[fileName.length-1];
+                    btn = btnTmpl.replace( /{{url}}/g, itm ).replace( /{{file_name}}/g, fileName);
+                    btn = $(btn);
+                    btn.click(downloadFile);
+                    $ListFileDownload.append(btn);
+                }
+            }
+            showDownloadLoading(false);
+        },
+        function( errorThrown ){
+            showDownloadLoading(false);
         });
     });
 }();

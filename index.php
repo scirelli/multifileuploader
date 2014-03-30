@@ -47,7 +47,7 @@
                 <!-- Column 2 -->
                 <div class="col-md-6 col2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Download</div>
+                        <div class="panel-heading">Download <div id="download-loading" class="title-loading-icon"></div></div>
                         <div class="panel-body">
                             <div class="content-list">
                                 <ul id="ul_filedownloads" class="">
@@ -59,7 +59,7 @@
             </div>
         </div>
         <span id="download-button-template" class="hidden">
-            <button class="btn btn-default" data-url="{{url}}"></button>
+            <button class="btn btn-default download-file" data-url="{{url}}">{{file_name}}</button>
         </span>
         <span id="file-upload-template" class="hidden">
             <form role="form" method="POST" action="act_uploadFiles.php" enctype="multipart/form-data">
@@ -72,6 +72,7 @@
         <!-- Funkiness for crappy IE -->
         <span id="frame-file-upload-template" class="hidden">
             <div class="div-frame form-group">
+                <div class="title-loading-icon"></div>
                 <button class="btn btn-xs btn-danger remove-frame">-</button> 
                 <iframe src="fileuploadform.html" class="frame-file-upload" data-id="{{frame_id}}"></iframe>
             </div>
