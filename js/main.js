@@ -130,7 +130,8 @@
         return deferred.promise;
     }
     function downloadFile( e ){
-        debugger;
+        var $me = $(this);
+        window.open( $me.attr('data-url') );
     }
     $(document).ready(function(){
         $addFileBtn.click(addFrameFileBtnClick);
