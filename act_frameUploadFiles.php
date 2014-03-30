@@ -13,19 +13,12 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/frame.css">
         <link rel="stylesheet" href="js/vendor/bootstrap/css/bootstrap.min.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
-    <body>
-        <?PHP
+    <body><?PHP
             $output = array(
                 'files'     => $_FILES,
                 'request'   => $_REQUEST
             );
             echo json_encode($output);
-        ?>
-        <script src="js/vendor/jquery-1.10.2.min.js"></script>
-        <script src="js/vendor/q.js"></script>
-        <script src="js/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-    </body>
+        ?></body>
 </html>

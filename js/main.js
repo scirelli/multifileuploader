@@ -85,9 +85,9 @@
             $lding.css('visibility','visible');
             form.appendChild(s[0]);
             $(this).load(function(e){
-                console.log(JSON.parse(this.contentDocument.body.innerText));
-                this.contentDocument.body.innerHTML = 'Success!';
                 $lding.css('visibility','hidden');
+                console.log(JSON.parse(this.contentDocument.body.innerHTML));
+                this.contentDocument.body.innerHTML = 'Success!';
             });
             form.submit();
         });
