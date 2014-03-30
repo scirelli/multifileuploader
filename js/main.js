@@ -78,18 +78,24 @@
 
     function uploadFrameFileBtnClick(e){
         $('.container iframe').each(function(index){
-            var form   = this.contentDocument.getElementsByTagName('form')[0],
+            var form   = this.contentDocument.getElementsByTagName('form'),
                 s      = $('<input type="hidden" name="file_id" value="' + $(this).attr('data-id') + '"/>'),
                 $lding = $(this).parent().find('.title-loading-icon');
 
             $lding.css('visibility','visible');
-            form.appendChild(s[0]);
-            $(this).load(function(e){
-                $lding.css('visibility','hidden');
-                console.log(JSON.parse(this.contentDocument.body.innerHTML));
-                this.contentDocument.body.innerHTML = 'Success!';
-            });
-            form.submit();
+            if( form ){
+                form = form[0];
+                form.appendChild(s[0]);
+                $(this).load(function(e){
+                    $lding.css('visibility','hidden');
+                    try{
+                        console.log(JSON.parse(this.contentDocument.body.innerHTML));
+                    }catch(e){
+                    }
+                    this.contentDocument.body.innerHTML = 'Success!';
+                });
+                form.submit();
+            }
         });
         e.preventDefault();
         return false;
