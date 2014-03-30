@@ -95,6 +95,8 @@
                     this.contentDocument.body.innerHTML = 'Success!';
                 });
                 form.submit();
+            }else{
+                $lding.css('visibility','hidden');
             }
         });
         e.preventDefault();
