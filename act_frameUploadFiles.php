@@ -14,11 +14,15 @@
         <link rel="stylesheet" href="css/frame.css">
         <link rel="stylesheet" href="js/vendor/bootstrap/css/bootstrap.min.css">
     </head>
-    <body><?PHP
+    <body>
+
+    <body>
+        <span id="response" class="display:none;"><?PHP
             $output = array(
                 'files'     => $_FILES,
                 'request'   => $_REQUEST
             );
             echo json_encode($output);
-        ?></body>
+        ?></span>
+    </body>
 </html>

@@ -89,8 +89,10 @@
                 $(this).load(function(e){
                     $lding.css('visibility','hidden');
                     try{
-                        console.log(JSON.parse(this.contentDocument.body.innerHTML));
-                    }catch(e){
+                        console.log(JSON.parse(this.contentDocument.body.getElementById('response').innerHTML));
+                    }catch(ex){
+                        //do nothing
+                        console.log(ex);
                     }
                     this.contentDocument.body.innerHTML = 'Success!';
                 });
