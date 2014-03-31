@@ -59,7 +59,7 @@
             </div>
         </div>
         <span id="download-button-template" class="hidden">
-            <button class="btn btn-default download-file" data-url="{{url}}">{{file_name}}</button>
+            <button class="btn btn-default download-file" data-url="{{url}}" title="{{title}}">{{file_name}}</button>
         </span>
         <span id="file-upload-template" class="hidden">
             <form role="form" method="POST" action="act_uploadFiles.php" enctype="multipart/form-data">
@@ -81,6 +81,7 @@
         <script src="js/vendor/q.js"></script>
         <script src="js/vendor/bootstrap/js/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
+        <script src="js/extras-string.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

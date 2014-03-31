@@ -14,12 +14,29 @@ function gfe($filename){
     return strtolower($pathinfo['extension']);
 }
 
+function human_filesize($bytes, $decimals = 2) {
+  $sz = 'BKMGTP';
+  $factor = floor((strlen($bytes) - 1) / 3);
+  return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
+}
+
 // Open a known directory, and proceed to read its contents
 if (is_dir($downloadFolder)){
 	if ($dh = opendir($downloadFolder)){
         while (($file = readdir($dh)) !== false){
-            if( is_file($downloadFolder . $file) ){
-                $output[] = $baseURL . $user . '/' . $file;
+            $localFile = $downloadFolder . $file;
+            if( is_file($localFile) ){
+                $last_modified = filemtime($localFile);
+                if($last_modified !== false ){
+                    $last_modified = date('m/d/Y H:i:s',$last_modified);
+                }else{
+                    $last_modified = 'Unknown';
+                }
+                $output[] = array(
+                    'url'           => $baseURL . $user . '/' . $file,
+                    'last_modified' => $last_modified,
+                    'size'          => human_filesize(filesize($localFile))
+                );
             }
         }
 		closedir($dh);

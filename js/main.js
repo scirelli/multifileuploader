@@ -147,11 +147,17 @@
         $addFileBtn.click();
         getDownLoadableFiles().then(function(data){
             if( data instanceof Array && data.length ){
-                for( var i=0,l=data.length,itm=null,fileName='',btn='',btnTmpl=sDownLoadButtonTemplate,url=''; i<l; i++ ){
+                for( var i=0,l=data.length,itm=null,title='',fileName='',btn='',o={},btnTmpl=sDownLoadButtonTemplate,url=''; i<l; i++ ){
                     itm = data[i];
-                    fileName = itm.split('/');
+                    url = itm.url;
+                    fileName = url.split('/');
                     fileName = fileName[fileName.length-1];
-                    btn = btnTmpl.replace( /{{url}}/g, itm ).replace( /{{file_name}}/g, fileName);
+                    o = {
+                        url:url,
+                        file_name:fileName,
+                        title:'Last modified: ' + itm.last_modified + '\n' + 'Size: ' + itm.size 
+                    }
+                    btn = btnTmpl.mustache(o);//replace( /{{url}}/g, itm ).replace( /{{file_name}}/g, fileName);
                     btn = $(btn);
                     btn.click(downloadFile);
                     $ListFileDownload.append(btn);
